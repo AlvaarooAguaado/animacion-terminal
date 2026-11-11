@@ -59,7 +59,7 @@ function center(text) {
 }
 
 const starLines = buildStarLines('#');
-const texts = ['=== TEL AVIV ===', '... TEL AVIV ...'];
+const texts = ['=== MECA BEC ===', '... MECA BEC ...'];
 
 const frames = SHADES.map((shade, i) => {
   const color = `\x1b[38;5;${shade}m`;
