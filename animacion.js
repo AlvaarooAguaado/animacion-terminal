@@ -82,7 +82,7 @@ const server = http.createServer((req, res) => {
   // Si entra un navegador web (Chrome, Firefox, Edge, etc.), redirige a GitHub
   if (!userAgent.toLowerCase().includes('curl')) {
     res.writeHead(302, {
-      'Location': 'https://github.com/TU_USUARIO/TU_REPOSITORIO' // <-- Pon aquí el enlace a tu repo de GitHub
+      'Location': 'https://github.com/AlvaarooAguaado/animacion-terminal' // <-- Pon aquí el enlace a tu repo de GitHub
     });
     res.end();
     return;
