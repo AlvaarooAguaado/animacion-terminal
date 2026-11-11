@@ -12,7 +12,7 @@ const BOLD = '\x1b[1m';
 const WHITE = '\x1b[97m';
 const CLEAR = '\x1b[2J\x1b[H';
 
-// Tonos de azul (256 colores): de más oscuro a más claro y de vuelta
+// Tonos de azul (256 colores)
 const SHADES = [21, 27, 33, 39, 45, 39, 33, 27];
 
 function triangle(up) {
@@ -53,7 +53,6 @@ function buildStarLines(ch) {
   return lines;
 }
 
-// Centra un texto respecto al ancho de la estrella
 function center(text) {
   const pad = Math.max(0, Math.floor((COLS - text.length) / 2));
   return ' '.repeat(pad) + text;
@@ -62,7 +61,6 @@ function center(text) {
 const starLines = buildStarLines('#');
 const texts = ['=== TEL AVIV ===', '... TEL AVIV ...'];
 
-// Un frame por cada tono; el texto alterna entre los dos estilos
 const frames = SHADES.map((shade, i) => {
   const color = `\x1b[38;5;${shade}m`;
   const coloredStar = starLines
@@ -73,13 +71,24 @@ const frames = SHADES.map((shade, i) => {
 });
 
 const server = http.createServer((req, res) => {
-  // Evitar que peticiones automáticas de iconos devuelvan error 404 en el streaming
   if (req.url === '/favicon.ico') {
     res.writeHead(404);
     res.end();
     return;
   }
 
+  const userAgent = req.headers['user-agent'] || '';
+
+  // Si entra un navegador web (Chrome, Firefox, Edge, etc.), redirige a GitHub
+  if (!userAgent.toLowerCase().includes('curl')) {
+    res.writeHead(302, {
+      'Location': 'https://github.com/TU_USUARIO/TU_REPOSITORIO' // <-- Pon aquí el enlace a tu repo de GitHub
+    });
+    res.end();
+    return;
+  }
+
+  // Si entra por 'curl', muestra la animación en bucle
   res.writeHead(200, {
     'Content-Type': 'text/plain; charset=utf-8',
     'Transfer-Encoding': 'chunked',
