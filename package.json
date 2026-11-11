@@ -1,0 +1,13 @@
+{
+  "name": "animacion-terminal",
+  "version": "1.0.0",
+  "description": "Animación de terminal en Node.js",
+  "main": "animacion.js",
+  "scripts": {
+    "start": "node animacion.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs"
+}
