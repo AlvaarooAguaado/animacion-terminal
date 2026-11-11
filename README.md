@@ -15,4 +15,4 @@ Una animación interactiva en formato de texto plano con colores ANSI, diseñada
 Para disfrutar de la animación en tiempo real con sus colores originales en cualquier terminal, ejecuta el siguiente comando:
 
 ```bash
-curl -L [https://becamec.onrender.com](https://becamec.onrender.com)
+curl https://mecabec.onrender.com
