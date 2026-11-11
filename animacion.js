@@ -70,7 +70,7 @@ const frames = SHADES.map((shade, i) => {
   return coloredStar + '\n\n' + BOLD + WHITE + center(text) + RESET + '\n';
 });
 
-const GITHUB_REPO_URL = 'https://github.com/TU_USUARIO/TU_REPOSITORIO'; // <-- Pon tu enlace aquí
+const GITHUB_REPO_URL = 'https://github.com/AlvaarooAguaado/animacion-terminal'; // <-- Pon tu enlace aquí
 
 const server = http.createServer((req, res) => {
   if (req.url === '/favicon.ico') {
