@@ -73,9 +73,17 @@ const frames = SHADES.map((shade, i) => {
 });
 
 const server = http.createServer((req, res) => {
+  // Evitar que peticiones automáticas de iconos devuelvan error 404 en el streaming
+  if (req.url === '/favicon.ico') {
+    res.writeHead(404);
+    res.end();
+    return;
+  }
+
   res.writeHead(200, {
     'Content-Type': 'text/plain; charset=utf-8',
-    'Transfer-Encoding': 'chunked'
+    'Transfer-Encoding': 'chunked',
+    'Connection': 'keep-alive'
   });
 
   let index = 0;
@@ -94,7 +102,6 @@ const server = http.createServer((req, res) => {
   req.on('close', () => clearInterval(interval));
 });
 
-// MODIFICADO: Usa el puerto de la nube o el 3000 por defecto para pruebas locales
 const PORT = process.env.PORT || 3000;
 server.listen(PORT, () => {
   console.log(`Servidor corriendo en el puerto ${PORT}`);
