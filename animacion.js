@@ -70,6 +70,8 @@ const frames = SHADES.map((shade, i) => {
   return coloredStar + '\n\n' + BOLD + WHITE + center(text) + RESET + '\n';
 });
 
+const GITHUB_REPO_URL = 'https://github.com/TU_USUARIO/TU_REPOSITORIO'; // <-- Pon tu enlace aquí
+
 const server = http.createServer((req, res) => {
   if (req.url === '/favicon.ico') {
     res.writeHead(404);
@@ -79,16 +81,28 @@ const server = http.createServer((req, res) => {
 
   const userAgent = req.headers['user-agent'] || '';
 
-  // Si entra un navegador web (Chrome, Firefox, Edge, etc.), redirige a GitHub
+  // Si entra un navegador web, se le envía una página HTML ligera que redirige al instante
   if (!userAgent.toLowerCase().includes('curl')) {
-    res.writeHead(302, {
-      'Location': 'https://github.com/AlvaarooAguaado/animacion-terminal' // <-- Pon aquí el enlace a tu repo de GitHub
+    res.writeHead(200, {
+      'Content-Type': 'text/html; charset=utf-8'
     });
-    res.end();
+    res.end(`
+      <!DOCTYPE html>
+      <html>
+        <head>
+          <meta charset="utf-8">
+          <meta http-equiv="refresh" content="0;url=${GITHUB_REPO_URL}">
+          <title>Redirigiendo a GitHub...</title>
+        </head>
+        <body>
+          <p>Redirigiendo al repositorio... Si no redirige automáticamente, haz clic <a href="${GITHUB_REPO_URL}">aquí</a>.</p>
+        </body>
+      </html>
+    `);
     return;
   }
 
-  // Si entra por 'curl', muestra la animación en bucle
+  // Si entra por 'curl', ejecuta la animación en bucle con normalidad
   res.writeHead(200, {
     'Content-Type': 'text/plain; charset=utf-8',
     'Transfer-Encoding': 'chunked',
